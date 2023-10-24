@@ -38,6 +38,12 @@ jobs:
       - name: Get HUGO_VERSION from package.json
         id: get-version
         run: echo "HUGO_VERSION=$(npm pkg get dependencies.hugo-extended 2>/dev/null | tr -d \"\^)" >> "$GITHUB_OUTPUT"
+      - name: print HUGO_VERSION
+        env:
+          FOO: ${{ steps.get-version.outputs.HUGO_VERSION }}
+        run: |
+          echo $FOO
+          echo $HUGO_VERSION
   setup:
     runs-on: ubuntu-latest
     needs: build
