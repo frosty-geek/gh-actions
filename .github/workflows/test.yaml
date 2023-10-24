@@ -36,6 +36,7 @@ jobs:
           submodules: recursive
           fetch-depth: 0
       - name: Get HUGO_VERSION from package.json
+        id: get-version
         run: echo "HUGO_VERSION=$(npm pkg get dependencies.hugo-extended 2>/dev/null | tr -d \"\^)" >> "$GITHUB_OUTPUT"
   setup:
     runs-on: ubuntu-latest
@@ -43,5 +44,5 @@ jobs:
     steps:
       - name: print HUGO_VERSION
         env:
-          FOO: ${{ steps.build.outputs.HUGO_VERSION }}
+          FOO: ${{ steps.get-version.outputs.HUGO_VERSION }}
         run: echo $FOO
