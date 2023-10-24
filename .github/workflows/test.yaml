@@ -43,6 +43,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
+      - name: print HUGO_VERSION
+        run: echo $HUGO_VERSION
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
