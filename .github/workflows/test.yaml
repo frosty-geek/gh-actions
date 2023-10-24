@@ -37,7 +37,9 @@ jobs:
           fetch-depth: 0
       - name: Get HUGO_VERSION from package.json
         id: get-version
-        run: echo "HUGO_VERSION=$(npm pkg get dependencies.hugo-extended 2>/dev/null | tr -d \"\^)" >> "$GITHUB_OUTPUT"
+        run: |
+            echo "HUGO_VERSION=$(npm pkg get dependencies.hugo-extended 2>/dev/null | tr -d \"\^)" >> "$GITHUB_OUTPUT"
+            echo "HUGO_VERSION=$(npm pkg get dependencies.hugo-extended 2>/dev/null | tr -d \"\^)" >> "$GITHUB_ENV"
       - name: print HUGO_VERSION
         env:
           FOO: ${{ steps.get-version.outputs.HUGO_VERSION }}
